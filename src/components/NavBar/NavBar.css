@@ -1,0 +1,62 @@
+@import "../../index.css";
+
+
+.app_header {
+    /* Layout & Positioning */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
+.nav {
+    /* Layout & Positioning */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+  /* Dimensions & Spacing */
+  height: 70px;
+  padding: 0 15px;
+  width: 100%;
+
+  /* Background & Borders */
+  background-color: #00000000;
+  /* border-bottom: 1px solid #878787; */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+  /* Text & Typography */
+  color: #333333;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+
+  /* Transitions */
+  transition: all 0.3s ease;
+}
+
+
+/* Logo styles */
+.app_header .logo img {
+    width: 30px;
+    height: 30px;
+    border: none;
+}
+
+.app_header .logo a {
+    border: none;
+}
+
+.app_header .navAction button  {
+    padding: 0;
+    margin: 0;
+    padding: 5px;
+    border-radius: 8px;
+    background-color: #00000000;
+    border: none;
+    cursor: pointer;
+    transition: background .3s ease-in;
+}

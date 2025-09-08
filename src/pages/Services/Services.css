@@ -1,0 +1,235 @@
+.services{
+    width: 100%;
+}
+
+.lists{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-height: 50vh;
+}
+
+
+
+/* Style de base pour toutes les cartes */
+.card {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: var(--card-transition);
+  min-height: 320px;
+  min-width: 100;
+  background-color: #35313157;
+}
+
+.dark .card {
+  background-color: var(--card-bg-dark);
+  /* box-shadow: var(--card-shadow-dark); */
+  /* border: var(--card-border-dark); */
+}
+
+/* Carte Basique */
+.card.basic {
+  max-width: 350px;
+}
+
+.card_header {
+  padding: var(--card-padding);
+  border-bottom: var(--card-border-light);
+  /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+  color: white;
+}
+
+.dark .card_header {
+  border-bottom: var(--card-border-dark);
+}
+
+.card_title {
+  font-size: 1.25rem;
+  margin: 0;
+  color: inherit;
+}
+
+.card_body {
+  padding: var(--card-padding);
+}
+
+.card_text {
+  color: inherit;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.card_footer {
+  padding: var(--card-padding);
+  border-top: var(--card-border-light);
+  display: flex;
+}
+
+.dark .card_footer {
+  border-top: var(--card-border-dark);
+}
+
+/* Carte avec Image */
+.card.with-image {
+  display: flex;
+  align-items: flex-start;
+}
+
+.card_image {
+  flex: 1;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 200px;
+  overflow: hidden;
+}
+
+.card_image img {
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.card.with-image:hover .card_image img {
+  transform: scale(1.05);
+}
+
+.card_content {
+  padding: var(--card-padding);
+}
+
+.card_actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* Carte avec Effet Hover */
+.card.hover-effect {
+  position: relative;
+  padding: var(--card-padding);
+  text-align: center;
+  cursor: pointer;
+  max-width: 280px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card_icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.card_hover_content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background: rgba(54, 225, 255, 0.9); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: var(--card-radius);
+}
+
+.card.hover-effect:hover .card_hover_content {
+  opacity: 1;
+}
+
+.card.hover-effect:hover {
+  transform: translateY(-5px);
+  /* box-shadow: 0 8px 30px rgba(54, 225, 255, 0.2); */
+}
+
+/* Boutons de carte */
+.card_button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: var(--card-transition);
+  /* background-color: var(--button-hover-main-color); */
+  color: var(--light-mode-color);
+}
+
+.dark .card_button {
+  /* background-color: var(--button-click-main-color); */
+  color: var(--dark-mode-color);
+}
+
+.card_button:hover {
+  background-color: var(--primary-color);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.card_button.primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.card_button.primary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.card_button.secondary {
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.card_button.secondary:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .lists{
+    min-height: 50vh;
+  }
+
+  .card {
+    margin: 0.5rem;
+    max-width: 100%;
+  }
+  
+  .card_actions {
+    flex-direction: column;
+  }
+  
+  .card_button {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* Animation d'entrée */
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: cardEntrance 0.6s ease-out;
+}

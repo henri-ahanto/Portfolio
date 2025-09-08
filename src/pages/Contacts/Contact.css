@@ -1,0 +1,27 @@
+.contact {
+  height: 50vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3%;
+}
+
+.contact.light{
+  background-color: #f1eaea;
+}
+
+.contact form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 70%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: var(--container-input-light-background);
+}
+
+.contact.light form{
+  background-color: #35313157;
+  color: aliceblue;
+}
