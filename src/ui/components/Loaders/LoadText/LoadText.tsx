@@ -16,5 +16,5 @@ export function LoadText({ children, keyName }: { keyName: string; children?: an
   }, [keyName])
 
   if (!value) return children || null
-  return <> {value}</>
+  return <>{value}</>
 }
