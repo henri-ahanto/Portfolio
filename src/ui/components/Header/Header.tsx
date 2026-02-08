@@ -2,7 +2,6 @@
 
 import { Menu as MenuIcon } from 'lucide-react'
 import { Logo } from '../Logo/Logo'
-import { Menu } from '../Menu/Menu'
 import { ThemeButton } from '../ThemeButton/ThemeButton'
 import { Drawer } from '../Drawer/Drawer'
 import { useDrawer } from '@/domain/hooks/useDrawer/useDrawer'
@@ -10,6 +9,8 @@ import '../../../app/globals.css';
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { DrawerItem } from '../Drawer/DrawerItem'
+import { Home, BookOpen, Layers, Mail } from 'lucide-react'
 
 export const Header = () => {
   const { open, toggle, closeDrawer } = useDrawer()
@@ -46,10 +47,10 @@ export const Header = () => {
   };
 
   const items = [
-    { label: 'Accueil', href: '/', position: 'home' },
-    { label: 'Parcours', href: '/#mycourses', position: 'mycourses' },
-    { label: 'Stack', href: '/#stack', position: 'stack' },
-    { label: 'Contact', href: '/#contact', position: 'contact' },
+    { label: 'Accueil', href: '/', position: 'home', icon: <Home size={18} /> },
+    { label: 'Parcours', href: '/#mycourses', position: 'mycourses', icon: <BookOpen size={18} /> },
+    { label: 'Stack', href: '/#stack', position: 'stack', icon: <Layers size={18} /> },
+    { label: 'Contact', href: '/#contact', position: 'contact', icon: <Mail size={18} /> },
   ]
 
   return (
@@ -103,22 +104,36 @@ export const Header = () => {
           })}
         </nav>
 
-        <div className="hidden md:flex gap-4">
+        <div className="hidden lg:flex gap-4">
           <ThemeButton />
         </div>
 
-        <button onClick={toggle} className="md:hidden">
+        <button onClick={toggle} className="lg:hidden">
           <MenuIcon />
         </button>
 
         <Drawer open={open} onClose={closeDrawer}>
-          <nav className="flex flex-col gap-4">
-            {items.map(i => (
-              <a key={i.href} href={i.href}>
-                {i.label}
-              </a>
-            ))}
-            <ThemeButton />
+          <nav className="flex flex-col">
+            {/* Conteneur de liens avec animation en cascade */}
+            <div className="space-y-1 mb-6">
+              {items.map((i) => (
+                <DrawerItem
+                  key={i.href}
+                  href={i.href}
+                  label={i.label}
+                  icon={i.icon} // Assure-toi que tes items ont une icône Lucide
+                  onClick={closeDrawer}
+                />
+              ))}
+            </div>
+
+            {/* Section séparée pour les actions système */}
+            <div className="mt-4 pt-6 border-t border-slate-200 dark:border-white/5">
+              <div className="px-4 py-2 flex items-center justify-between bg-slate-100 dark:bg-white/5 rounded-2xl">
+                <span className="text-xs font-bold text-slate-500 uppercase tracking-widest italic">Thème</span>
+                <ThemeButton />
+              </div>
+            </div>
           </nav>
         </Drawer>
       </header>

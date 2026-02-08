@@ -16,7 +16,7 @@ export const CourseCard = ({
   tags = [],
 }: CourseCardProps) => {
   return (
-    <div className="group relative overflow-hidden rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-[#0b0a1f]/70 backdrop-blur-md p-6 transition-all hover:shadow-xl hover:-translate-y-1">
+    <div className="group relative overflow-hidden rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-[#0b0a1f]/70 backdrop-blur-md p-6 transition-all hover:shadow-xl hover:-translate-y-1 w-full">
       
       {/* Glow effect */}
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-linear-to-br from-indigo-500/10 to-purple-500/10" />
