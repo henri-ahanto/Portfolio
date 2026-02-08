@@ -24,7 +24,7 @@ export default function AchievementsAdminPage() {
   const stats = useMemo(() => ({
     total: data.length,
     pinned: data.filter((a: any) => a.is_pinned).length,
-    withLinks: data.filter((a: any) => a.demo_link || a.repositoty_link).length
+    withLinks: data.filter((a: any) => a.demo_link || a.repository_link).length
   }), [data])
 
   const submit = async () => {
@@ -97,8 +97,8 @@ export default function AchievementsAdminPage() {
                   <input
                     placeholder="Lien Repository GitHub"
                     className="w-full pl-12 p-4 rounded-2xl bg-slate-800/30 border border-white/5 outline-none text-sm"
-                    value={form.repositoty_link || ''}
-                    onChange={e => setForm({ ...form, repositoty_link: e.target.value })}
+                    value={form.repository_link || ''}
+                    onChange={e => setForm({ ...form, repository_link: e.target.value })}
                   />
                 </div>
               </div>

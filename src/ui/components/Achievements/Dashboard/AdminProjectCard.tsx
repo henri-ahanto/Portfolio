@@ -12,7 +12,7 @@ interface Project {
     description: string
     image_url: string
     demo_link?: string
-    repositoty_link?: string
+    repository_link?: string
     is_pinned: boolean
 }
 
@@ -61,8 +61,8 @@ export const AdminProjectCard = ({
                                 <Globe size={12} /> DÉMO
                             </a>
                         )}
-                        {project.repositoty_link && (
-                            <a href={project.repositoty_link} target="_blank" className="flex items-center gap-1 text-[10px] font-bold text-slate-400 hover:text-white transition">
+                        {project.repository_link && (
+                            <a href={project.repository_link} target="_blank" className="flex items-center gap-1 text-[10px] font-bold text-slate-400 hover:text-white transition">
                                 <Github size={12} /> REPO
                             </a>
                         )}

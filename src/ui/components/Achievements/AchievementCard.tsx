@@ -1,8 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Globe, Github, ExternalLink } from 'lucide-react'
-import { STATUS_CONFIG } from '@/domain/const/Achievements' 
+import { Globe, Github, ExternalLink, Link } from 'lucide-react'
+import { STATUS_CONFIG } from '@/domain/const/Achievements'
 
 export const AchievementCard = ({ project }: { project: any }) => {
     const statusKey = (project.status as keyof typeof STATUS_CONFIG) || 'not_start';
@@ -30,8 +30,8 @@ export const AchievementCard = ({ project }: { project: any }) => {
                             <Globe size={22} />
                         </a>
                     )}
-                    {project.repositoty_link && (
-                        <a href={project.repositoty_link} target="_blank" className="p-4 bg-white/10 text-white border border-white/20 backdrop-blur-md rounded-full hover:scale-110 transition-transform">
+                    {project.repository_link && (
+                        <a href={project.repository_link} target="_blank" className="p-4 bg-white/10 text-white border border-white/20 backdrop-blur-md rounded-full hover:scale-110 transition-transform">
                             <Github size={22} />
                         </a>
                     )}
@@ -51,13 +51,15 @@ export const AchievementCard = ({ project }: { project: any }) => {
 
                 {/* Description avec rendu HTML limité à 2 lignes */}
                 <div
-                    className="text-slate-400 text-sm line-clamp-2 prose prose-invert opacity-80"
+                    className=" text-white dark:text-slate-400 text-sm line-clamp-2 prose prose-invert opacity-80"
                     dangerouslySetInnerHTML={{ __html: project.description }}
                 />
 
                 <div className="mt-6 flex items-center justify-between">
                     <span className="text-[10px] font-bold text-slate-600 uppercase tracking-[0.2em]">Détails du projet</span>
-                    <ExternalLink size={14} className="text-slate-600 group-hover:text-blue-500 transition-colors" />
+                    <a href={`/achievements/${project.id}`}>
+                        <ExternalLink size={14} className="text-slate-600 group-hover:text-blue-500 transition-colors" />
+                    </a>
                 </div>
             </div>
         </motion.div>

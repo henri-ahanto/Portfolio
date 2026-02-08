@@ -1,5 +1,8 @@
 'use client'
 
+import { motion } from 'framer-motion'
+import { MapPin, Calendar, Terminal } from 'lucide-react'
+
 type CourseCardProps = {
   title: string
   description: string
@@ -16,40 +19,68 @@ export const CourseCard = ({
   tags = [],
 }: CourseCardProps) => {
   return (
-    <div className="group relative overflow-hidden rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-[#0b0a1f]/70 backdrop-blur-md p-6 transition-all hover:shadow-xl hover:-translate-y-1 w-full">
-      
-      {/* Glow effect */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-linear-to-br from-indigo-500/10 to-purple-500/10" />
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      whileHover={{ y: -5 }}
+      className="group relative overflow-hidden rounded-4xl border border-white/5 bg-slate-900/40 backdrop-blur-xl p-8 transition-all duration-500 hover:border-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/10"
+    >
+      {/* Accent Line - S'illumine au survol */}
+      <div className="absolute left-0 top-1/2 -translate-y-1/2 h-12 w-1 bg-blue-500/20 group-hover:h-2/3 group-hover:bg-blue-500 transition-all duration-500 rounded-r-full" />
 
-      <div className="relative z-10 space-y-3">
-        <h3 className="text-lg font-bold">{title}</h3>
+      {/* Glow effect arrière-plan */}
+      <div className="absolute -right-20 -top-20 h-40 w-40 bg-blue-600/10 blur-[80px] group-hover:bg-blue-600/20 transition-all duration-700" />
 
-        {period && (
-          <p className="text-sm text-gray-500 dark:text-gray-400">{period}</p>
-        )}
-
-        <p className="text-sm leading-relaxed text-gray-700 dark:text-gray-300">
-          {description}
-        </p>
-
-        {((location ?? "") || tags?.length > 0) && (
-          <div className="flex flex-wrap gap-2 pt-2">
+      <div className="relative z-10 space-y-4">
+        {/* Header : Title & Period */}
+        <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
+          <div className="space-y-1">
+            <h3 className="text-2xl font-black italic uppercase tracking-tighter text-white leading-none group-hover:text-blue-400 transition-colors">
+              {title}
+            </h3>
             {location && (
-              <span className="text-xs px-2 py-1 rounded-full bg-black/5 dark:bg-white/10">
-                📍 {location}
-              </span>
+              <div className="flex items-center gap-1.5 text-slate-500 text-[10px] font-bold uppercase tracking-widest">
+                <MapPin size={12} className="text-blue-500/50" />
+                {location}
+              </div>
             )}
-            {tags.map(tag => (
+          </div>
+
+          {period && (
+            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/5 text-[10px] font-black text-slate-400 uppercase tracking-widest italic group-hover:border-blue-500/20 group-hover:text-blue-400 transition-all">
+              <Calendar size={12} />
+              {period}
+            </div>
+          )}
+        </div>
+
+        {/* Description */}
+        <div
+          className="text-sm leading-relaxed text-slate-400 group-hover:text-slate-300 transition-colors line-clamp-3"
+          dangerouslySetInnerHTML={{ __html: description }}
+        />
+
+        {/* Footer : Tags */}
+        {tags.length > 0 && (
+          <div className="flex flex-wrap gap-2 pt-4">
+            {tags.map((tag) => (
               <span
                 key={tag}
-                className="text-xs px-2 py-1 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
+                className="flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-lg bg-black/40 text-slate-500 border border-white/5 group-hover:border-blue-500/10 group-hover:text-blue-400/80 transition-all"
               >
-                #{tag}
+                <Terminal size={10} />
+                {tag}
               </span>
             ))}
           </div>
         )}
       </div>
-    </div>
+
+      {/* Corner Icon - Discret mais pro */}
+      <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-10 translate-x-4 group-hover:translate-x-0 transition-all duration-500">
+        <Terminal size={40} className="text-white" />
+      </div>
+    </motion.div>
   )
 }

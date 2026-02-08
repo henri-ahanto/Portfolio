@@ -11,7 +11,7 @@ import { StackCarousel } from '@/ui/components/StackCarousel/StackCarousel'
 import { useStacks } from '@/domain/hooks/useStacks/useStacks'
 import { ContactForm } from '@/ui/components/Forms/ContactForm/ContactForm'
 import { MyStaticInfo } from '@/ui/components/MyStaticInfo/MyStaticInfo'
-import { Archive } from 'lucide-react'
+import { Archive, Rocket } from 'lucide-react'
 import { SocialIcon } from 'react-social-icons'
 import { CourseCard } from '@/ui/components/cards/CourseCard/CourseCard'
 import Link from 'next/link'
@@ -67,7 +67,8 @@ export default function HomePage() {
             {/* Badge */}
             <div className='w-fit p-px bg-linear-to-r from-violet-500 to-blue-700 rounded-full shadow-lg'>
               <div className='bg-white dark:bg-slate-900 rounded-full transition duration-300'>
-                <div className='py-1 px-4 bg-linear-to-r from-violet-500 to-blue-700 bg-clip-text text-transparent text-sm font-bold'>
+                <div className='py-1 px-4 bg-linear-to-r from-violet-500 to-blue-700 bg-clip-text text-transparent text-sm font-bold flex items-center gap-2'>
+                  <Rocket size={20} className='text-violet-500'/>
                   <LoadText keyName="hero.badge" />
                 </div>
               </div>
@@ -190,6 +191,7 @@ export default function HomePage() {
       </Section>
 
       <Section
+      id='achievements'
         from='#2247FF'
         to='#4E1365'
         title="Mes Réalisations"
@@ -202,7 +204,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <Section title="Contact Me" id='contact' from='' to='' >
+      <Section title="Contact Me" id='contact' from='#2247FF' to='#4E1365' >
         <div className="grid md:grid-cols-2 gap-12">
           <MyStaticInfo />
           <ContactForm />

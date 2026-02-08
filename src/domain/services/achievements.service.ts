@@ -16,14 +16,24 @@ export const achievementsService = {
       .order('created_at', { ascending: false })
       .limit(6);
   },
+  
+  find: async (id: string) => {
+    const { data, error } = await supabase
+      .from('achievements')
+      .select('*')
+      .eq('id', id)
+      .single() // Récupère l'objet directement au lieu d'un tableau
 
+    if (error) throw error
+    return data
+  },
   // Création avec upload d'image (similaire au stacksService)
   async create(payload: {
     title: string;
     description: string;
     image: File;
     demo_link?: string;
-    repositoty_link?: string;
+    repository_link?: string;
     status?: string;
     is_pinned?: boolean
   }) {
@@ -46,7 +56,7 @@ export const achievementsService = {
       description: payload.description,
       image_url: urlData.publicUrl,
       demo_link: payload.demo_link,
-      repositoty_link: payload.repositoty_link,
+      repository_link: payload.repository_link,
       status: payload.status || 'start',
       is_pinned: payload.is_pinned ?? false,
     })

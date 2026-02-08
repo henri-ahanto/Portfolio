@@ -2,14 +2,15 @@
 
 import { useMessages } from '@/domain/hooks/useMessages/useMessages'
 import { messagesService } from '@/domain/services/messages.service'
+import { MessageCard } from '@/ui/components/Message/MessageCard'
 import { motion, AnimatePresence } from 'framer-motion'
-import { 
-  Mail, 
-  MailOpen, 
-  Trash2, 
-  CheckCheck, 
-  User, 
-  AtSign, 
+import {
+  Mail,
+  MailOpen,
+  Trash2,
+  CheckCheck,
+  User,
+  AtSign,
   Clock,
   Inbox,
   MessageSquare
@@ -58,89 +59,25 @@ export default function MessagesAdminPage() {
       <div className="grid gap-6">
         <AnimatePresence mode="popLayout">
           {data.length > 0 ? (
-            data.map((m, index) => (
-              <motion.div
-                layout
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ delay: index * 0.05 }}
-                key={m.id}
-                className={`group relative p-6 rounded-4xl border transition-all duration-300 ${
-                  !m.is_read 
-                    ? 'bg-slate-900/60 border-emerald-500/30 shadow-[0_0_20px_rgba(16,185,129,0.05)]' 
-                    : 'bg-slate-900/20 border-white/5 opacity-80 hover:opacity-100'
-                }`}
-              >
-                <div className="flex flex-col md:flex-row justify-between gap-6">
-                  {/* Contenu du message */}
-                  <div className="flex-1 space-y-4">
-                    <div className="flex flex-wrap items-center gap-4">
-                      <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-800/50 rounded-xl border border-white/5">
-                        <User size={14} className="text-emerald-400" />
-                        <span className="text-sm font-bold text-white">{m.name}</span>
-                      </div>
-                      <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-800/50 rounded-xl border border-white/5">
-                        <AtSign size={14} className="text-slate-500" />
-                        <span className="text-sm text-slate-400">{m.email}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-slate-600 text-xs italic">
-                        <Clock size={12} />
-                        <span>Récemment reçu</span>
-                      </div>
-                    </div>
-
-                    <div className="relative pl-4 border-l-2 border-slate-800 group-hover:border-emerald-500/50 transition-colors">
-                       <MessageSquare size={16} className="absolute -left-[9px] -top-1 text-slate-800 bg-[#050508] group-hover:text-emerald-500 transition-colors" />
-                       <p className="text-slate-300 leading-relaxed text-base">
-                         {m.message}
-                       </p>
-                    </div>
-                  </div>
-
-                  {/* Actions */}
-                  <div className="flex md:flex-col gap-2 shrink-0 self-end md:self-center">
-                    {!m.is_read ? (
-                      <button
-                        onClick={() => markRead(m.id)}
-                        className="p-4 rounded-2xl bg-emerald-500 text-white shadow-lg shadow-emerald-900/20 hover:scale-105 active:scale-95 transition-all flex items-center gap-2"
-                        title="Marquer comme lu"
-                      >
-                        <CheckCheck size={20} />
-                        <span className="md:hidden font-bold">Lu</span>
-                      </button>
-                    ) : (
-                      <div className="p-4 rounded-2xl bg-slate-800/50 text-slate-500 border border-white/5 flex items-center justify-center">
-                        <MailOpen size={20} />
-                      </div>
-                    )}
-                    
-                    <button 
-                      onClick={() => remove(m.id)}
-                      className="p-4 rounded-2xl bg-slate-800/50 hover:bg-red-500/20 text-slate-500 hover:text-red-400 transition-all border border-white/5"
-                      title="Supprimer"
-                    >
-                      <Trash2 size={20} />
-                    </button>
-                  </div>
-                </div>
-
-                {/* Indicateur visuel pour message non lu */}
-                {!m.is_read && (
-                  <div className="absolute top-6 right-6 w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_10px_#10b981]" />
-                )}
-              </motion.div>
+            data.map((msg) => (
+              <MessageCard
+                key={msg.id}
+                message={msg}
+                onDelete={remove}
+                onRead={markRead}
+              />
             ))
           ) : (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-center py-20 border-2 border-dashed border-white/5 rounded-[3rem]"
+              className="text-center py-32 border border-dashed border-white/10 rounded-[3rem] bg-slate-900/10"
             >
-              <div className="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Mail className="text-slate-700" size={32} />
+              <div className="w-20 h-20 bg-slate-900 border border-white/5 rounded-full flex items-center justify-center mx-auto mb-6 shadow-2xl">
+                <MailOpen className="text-slate-700" size={32} />
               </div>
-              <p className="text-slate-500 font-medium">Votre boîte de réception est vide.</p>
+              <h3 className="text-white font-black italic uppercase tracking-tighter text-xl mb-2">Silence radio</h3>
+              <p className="text-slate-500 font-medium text-sm">Votre boîte de réception est parfaitement propre.</p>
             </motion.div>
           )}
         </AnimatePresence>

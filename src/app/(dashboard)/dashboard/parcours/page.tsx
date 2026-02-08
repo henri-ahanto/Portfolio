@@ -11,6 +11,7 @@ import {
   MapPin, Calendar, Tag, Briefcase,
   Search, Pin
 } from 'lucide-react'
+import { TiptapEditor } from '@/ui/components/TipTap/TipTapEditor'
 
 export default function ParcoursAdminPage() {
   const { data = [], refresh } = useParcours()
@@ -120,12 +121,10 @@ export default function ParcoursAdminPage() {
 
               <div className="space-y-1">
                 <label className="text-[10px] uppercase tracking-widest text-slate-500 ml-1">Description</label>
-                <textarea
-                  placeholder="Détaillez vos missions..."
-                  rows={4}
-                  className="w-full p-3 rounded-xl bg-slate-800/50 border border-white/5 outline-none focus:ring-1 ring-blue-500/50 transition resize-none text-sm"
+                <TiptapEditor
+                  key={editingId || 'new'}
                   value={form?.description || ''}
-                  onChange={e => setForm({ ...form, description: e.target.value })}
+                  onChange={(html) => setForm({ ...form, description: html })}
                 />
               </div>
 
