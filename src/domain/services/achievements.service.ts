@@ -24,6 +24,7 @@ export const achievementsService = {
     image: File;
     demo_link?: string;
     repositoty_link?: string;
+    status?: string;
     is_pinned?: boolean
   }) {
     // 1. Gestion de l'upload de l'image
@@ -46,6 +47,7 @@ export const achievementsService = {
       image_url: urlData.publicUrl,
       demo_link: payload.demo_link,
       repositoty_link: payload.repositoty_link,
+      status: payload.status || 'start',
       is_pinned: payload.is_pinned ?? false,
     })
 

@@ -17,6 +17,7 @@ import { CourseCard } from '@/ui/components/cards/CourseCard/CourseCard'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { AnimatedSpan, Terminal, TypingAnimation } from '@/components/ui/terminal'
+import { AchievementCard } from '@/ui/components/Achievements/AchievementCard'
 
 
 export default function HomePage() {
@@ -125,7 +126,7 @@ export default function HomePage() {
         to='#4E1365'
         cta={
           <motion.div
-            whileHover={{ scale: 1.05}}
+            whileHover={{ scale: 1.05 }}
           >
             <Link
               href="/mycourses"
@@ -188,13 +189,15 @@ export default function HomePage() {
         <StackCarousel stacks={stacks} />
       </Section>
 
-      <Section from='#2247FF' to='#4E1365' title="Mes Réalisations" cta={<a href="/achievements">Découvrir mes projets</a>}>
-        <div className="grid md:grid-cols-3 gap-6">
-          {achievements.filter(a => a.is_pinned).slice(0, 3).map(a => (
-            <div key={a.id} className="border p-6 rounded-xl">
-              <h3 className="font-bold">{a.title}</h3>
-              <p>{a.description}</p>
-            </div>
+      <Section
+        from='#2247FF'
+        to='#4E1365'
+        title="Mes Réalisations"
+        cta={<a href="/achievements" className="font-bold hover:underline">Découvrir mes projets</a>}
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {achievements.slice(0, 6).map(a => (
+            <AchievementCard key={a.id} project={a} />
           ))}
         </div>
       </Section>
