@@ -15,8 +15,9 @@ export default function LoginPage() {
     setError('')
     try {
       await login(password)
-    } catch (err: any) {
-      setError(err.message || 'Erreur de connexion')
+    } catch (err) {
+      if (err instanceof Error)
+        setError(err.message || 'Erreur de connexion')
     } finally {
       setLoading(false)
     }
