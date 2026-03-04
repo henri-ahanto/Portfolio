@@ -1,14 +1,12 @@
-'use client'
-
 import { Hero } from '@/shared/ui/components/Hero/Hero'
 import { TextGradient } from '@/shared/ui/components/TextGradient/TextGradient'
 import { GradientBorderedButton } from '@/shared/ui/components/Buttons/GradientBorderedButton/GradientBorderedButton'
 import { Section } from '@/shared/ui/components/Section/Section'
 import { LoadText } from '@/shared/ui/components/Loaders/LoadText/LoadText'
-import { useParcours } from '@/shared/hooks/useParcours/useParcours'
-import { useAchievements } from '@/shared/hooks/useAchievements/useAchievements'
+import { getParcoursAction } from '@/shared/hooks/useParcours/action'
+import { getAchievementsAction } from '@/shared/hooks/useAchievements/action'
 import { StackCarousel } from '@/shared/ui/components/StackCarousel/StackCarousel'
-import { useStacks } from '@/shared/hooks/useStacks/useStacks'
+import { getStacksAction } from '@/shared/hooks/useStacks/action'
 import { ContactForm } from '@/shared/ui/components/Forms/ContactForm/ContactForm'
 import { MyStaticInfo } from '@/shared/ui/components/MyStaticInfo/MyStaticInfo'
 import { Archive, Rocket } from 'lucide-react'
@@ -20,10 +18,10 @@ import { AnimatedSpan, Terminal, TypingAnimation } from '@/shared/ui/components/
 import { AchievementCard } from '@/shared/ui/components/Achievements/AchievementCard'
 
 
-export default function HomePage() {
-  const { data: parcours } = useParcours()
-  const { data: achievements } = useAchievements()
-  const { data: stacks } = useStacks()
+export default async function HomePage() {
+  const parcours = await getParcoursAction(1, 10)
+  const achievements = await getAchievementsAction(1, 10)
+  const stacks = await getStacksAction(1, 10)
 
   return (
     <>
@@ -85,7 +83,7 @@ export default function HomePage() {
             {/* Description */}
             <p className='text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed'>
               Je suis un designer UI/UX et Développeur Fullstack spécialisé dans la création
-              d'applications mobiles, desktop et web haute performance.
+              d&apos;applications mobiles, desktop et web haute performance.
               Je transforme vos idées complexes en produits intuitifs.
             </p>
 
@@ -114,7 +112,7 @@ export default function HomePage() {
             </AnimatedSpan>
 
             <AnimatedSpan delay={1800} className="text-slate-500 text-sm">
-                // Fullstack Developer & UI Designer
+                {'// '}Fullstack Developer & UI Designer
             </AnimatedSpan>
           </Terminal>
         </div>
@@ -154,7 +152,7 @@ export default function HomePage() {
         }
       >
         <div className="grid lg:grid-cols-3 gap-6">
-          {parcours
+          {parcours.items
             .filter(p => p.is_pinned)
             .slice(0, 3)
             .map((p, index) => (
@@ -176,10 +174,10 @@ export default function HomePage() {
               >
                 <CourseCard
                   title={p.title}
-                  description={p.description}
-                  period={p.period}
-                  location={p.location}
-                  tags={p.tags}
+                  description={p.description || ''}
+                  period={p.period || ''}
+                  location={p.location || ''}
+                  tags={p.tags || []}
                 />
               </motion.div>
             ))}
@@ -187,7 +185,11 @@ export default function HomePage() {
       </Section>
 
       <Section id="stack" title="My Stack" from='#2247FF' to='#4E1365' className='overflow-visible py-7 flex items-center'>
-        <StackCarousel stacks={stacks} />
+        <StackCarousel stacks={stacks.items.map(stack => ({
+          ...stack,
+          logo_url: stack.logo_url || '',
+          description: stack.description || ''
+        }))} />
       </Section>
 
       <Section
@@ -198,7 +200,7 @@ export default function HomePage() {
         cta={<Link href="/achievements" className="font-bold hover:underline">Découvrir mes projets</Link>}
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {achievements.slice(0, 6).map(a => (
+          {achievements.items.slice(0, 6).map((a) => (
             <AchievementCard key={a.id} project={a} />
           ))}
         </div>

@@ -134,7 +134,7 @@ export class AchievementsRepositoryImpl extends AchievementsRepository implement
 
     // ─── Error Handler ─────────────────────────────────────────────────────────
 
-    handlePrismaError(error: unknown): never {
+    public handlePrismaError(error: unknown): never {
         console.error("Database Operation Failed:", error);
 
         if (error instanceof PrismaClientKnownRequestError) {
@@ -147,7 +147,7 @@ export class AchievementsRepositoryImpl extends AchievementsRepository implement
             }
             if (error.code === "P2002") {
                 const target = Array.isArray(error.meta?.target)
-                    ? (error.meta.target as string[]).join(", ")
+                    ? (error?.meta?.target as string[]).join(", ")
                     : (error.meta?.target ?? "unknown").toString();
                 throw new AchievementError(`Unique constraint violation on field(s): '${target}'.`, 409, target);
             }

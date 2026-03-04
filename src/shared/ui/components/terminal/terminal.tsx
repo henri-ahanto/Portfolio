@@ -11,7 +11,7 @@ import {
 } from "react"
 import { motion, MotionProps, useInView } from "framer-motion"
 
-import { cn } from "@/shared/lib/utils"
+import { cn } from "@/shared/utils/utils"
 
 interface SequenceContextValue {
   completeItem: (index: number) => void
@@ -50,13 +50,16 @@ export const AnimatedSpan = ({
   const itemIndex = useItemIndex()
   const [hasStarted, setHasStarted] = useState<boolean>(false)
   useEffect(() => {
+    return () => {
+
     if (!sequence || itemIndex === null) return
     if (!sequence.sequenceStarted) return
     if (hasStarted) return
     if (sequence.activeIndex === itemIndex) {
       setHasStarted(true)
     }
-  }, [sequence?.activeIndex, sequence?.sequenceStarted, hasStarted, itemIndex])
+    }
+  }, [sequence?.activeIndex, sequence?.sequenceStarted, hasStarted, itemIndex, sequence])
 
   const shouldAnimate = sequence ? hasStarted : startOnView ? isInView : true
 
@@ -139,15 +142,7 @@ export const TypingAnimation = ({
 
     const startTimeout = setTimeout(() => setStarted(true), delay)
     return () => clearTimeout(startTimeout)
-  }, [
-    delay,
-    startOnView,
-    isInView,
-    started,
-    sequence?.activeIndex,
-    sequence?.sequenceStarted,
-    itemIndex,
-  ])
+  }, [delay, startOnView, isInView, started, sequence?.activeIndex, sequence?.sequenceStarted, itemIndex, sequence])
 
   useEffect(() => {
     if (!started) return
@@ -168,7 +163,7 @@ export const TypingAnimation = ({
     return () => {
       clearInterval(typingEffect)
     }
-  }, [children, duration, started])
+  }, [children, duration, itemIndex, sequence, started])
 
   return (
     <MotionComponent

@@ -4,6 +4,7 @@
 import { StaticContentsRepository } from '@/data/repositories/static_content.repositoryimpl'
 import prisma from '@/shared/services/remote_db/prisma_service'
 import { GetPaginateStaticContentUseCase } from '@/domain/usecases/static_contents/get_paginate'
+import { GetByKeyStaticContentUseCase } from '@/domain/usecases/static_contents/get_by_key'
 import { CreateStaticContentUseCase } from '@/domain/usecases/static_contents/create'
 import { UpdateStaticContentUseCase } from '@/domain/usecases/static_contents/update'
 import { DeleteStaticContentUseCase } from '@/domain/usecases/static_contents/delete'
@@ -12,6 +13,10 @@ const repo = new StaticContentsRepository(prisma)
 
 export async function getStaticContentAction(page: number, pageSize: number) {
     return await new GetPaginateStaticContentUseCase(repo).execute({ page, peer_page: pageSize })
+}
+
+export async function getStaticContentByKey(key: string) {
+    return await new GetByKeyStaticContentUseCase(repo).execute({ key })
 }
 
 export async function createStaticContentAction(payload: any) {

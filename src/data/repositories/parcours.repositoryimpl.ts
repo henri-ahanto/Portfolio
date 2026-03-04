@@ -13,8 +13,9 @@ import {
     UpdateParcoursPayload,
 } from "@/shared/entities/types/parcour.type";
 import { ParcoursRepository as DomainParcoursRepository } from "@/domain/repository/parcours.repo";
+import { HandleErrorRepositoryInterface } from "@/shared/entities/interfaces/handlerrorrepository.interface";
 
-export class ParcoursRepository extends DomainParcoursRepository {
+export class ParcoursRepositoryImpl extends DomainParcoursRepository implements HandleErrorRepositoryInterface {
     #prisma: PrismaClient;
 
     constructor(prisma: PrismaClient) {
@@ -137,7 +138,7 @@ export class ParcoursRepository extends DomainParcoursRepository {
 
     // ─── Error Handler ─────────────────────────────────────────────────────────
 
-    private handlePrismaError(error: unknown): never {
+    public handlePrismaError(error: unknown): never {
         console.error("Database Operation Failed:", error);
 
         if (error instanceof PrismaClientKnownRequestError) {
@@ -150,7 +151,7 @@ export class ParcoursRepository extends DomainParcoursRepository {
             }
             if (error.code === "P2002") {
                 const target = Array.isArray(error.meta?.target)
-                    ? (error.meta.target as string[]).join(", ")
+                    ? (error.meta?.target as string[]).join(", ")
                     : (error.meta?.target ?? "unknown").toString();
                 throw new ParcoursError(`Unique constraint violation on field(s): '${target}'.`, 409, target);
             }

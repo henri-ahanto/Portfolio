@@ -1,6 +1,6 @@
 import { PrismaClient, static_contents } from "@/shared/database/prisma/generated/client";
 import { PrismaClientKnownRequestError, PrismaClientUnknownRequestError } from "@/shared/database/prisma/generated/internal/prismaNamespace";
-import { StaticContentsPanigation } from "@/shared/entities/StaticContent";
+import { StaticContentsPanigation } from "@/shared/entities/types/static_content.type";
 import { StaticContentType } from "@/shared/entities/types/static_content.type";
 import { StaticContentError } from "@/shared/errors/static_content.error";
 import { PrismaClientRustError } from "@prisma/client-runtime-utils";

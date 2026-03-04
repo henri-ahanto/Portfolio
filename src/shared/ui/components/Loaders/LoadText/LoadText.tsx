@@ -1,20 +1,19 @@
 'use client'
 
-import { supabase } from '@/shared/lib/supabase/client'
+import { getStaticContentByKey } from '@/shared/hooks/useStaticContent/action'
 import { useEffect, useState } from 'react'
 
-export function LoadText({ children, keyName }: { keyName: string; children?: any }) {
+export function LoadText({ children, keyName }: { keyName: string; children?: React.ReactNode }) {
   const [value, setValue] = useState<string | null>(null)
 
   useEffect(() => {
-    supabase
-      .from('static_contents')
-      .select('value')
-      .eq('key', keyName)
-      .single()
-      .then(({ data }) => setValue(data?.value ?? null))
+    getStaticContentByKey(keyName)
+      .then((data) => setValue(data?.value ?? null))
+      .catch((error) => {
+        console.error(`[LoadText] Error loading content for key: ${keyName}`, error)
+      })
   }, [keyName])
 
-  if (!value) return children || null
+  if (!value) return <>{children || null}</>
   return <>{value}</>
 }

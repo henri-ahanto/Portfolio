@@ -13,8 +13,9 @@ import {
     UpdateStackPayload,
 } from "@/shared/entities/types/stack.type";
 import { StacksRepository as DomainStacksRepository } from "@/domain/repository/stack.repo";
+import { HandleErrorRepositoryInterface } from "@/shared/entities/interfaces/handlerrorrepository.interface";
 
-export class StacksRepository extends DomainStacksRepository {
+export class StacksRepositoryImpl extends DomainStacksRepository implements HandleErrorRepositoryInterface {
     #prisma: PrismaClient;
 
     constructor(prisma: PrismaClient) {
@@ -112,7 +113,7 @@ export class StacksRepository extends DomainStacksRepository {
 
     // ─── Error Handler ─────────────────────────────────────────────────────────
 
-    private handlePrismaError(error: unknown): never {
+    public handlePrismaError(error: unknown): never {
         console.error("Database Operation Failed:", error);
 
         if (error instanceof PrismaClientKnownRequestError) {

@@ -13,8 +13,9 @@ import {
     UpdateMessagePayload,
 } from "@/shared/entities/types/message.type";
 import { MessagesRepository as DomainMessagesRepository } from "@/domain/repository/message.repo";
+import { HandleErrorRepositoryInterface } from "@/shared/entities/interfaces/handlerrorrepository.interface";
 
-export class MessagesRepository extends DomainMessagesRepository {
+export class MessagesRepositoryImpl extends DomainMessagesRepository implements HandleErrorRepositoryInterface {
     #prisma: PrismaClient;
 
     constructor(prisma: PrismaClient) {
@@ -131,7 +132,7 @@ export class MessagesRepository extends DomainMessagesRepository {
 
     // ─── Error Handler ─────────────────────────────────────────────────────────
 
-    private handlePrismaError(error: unknown): never {
+    public handlePrismaError(error: unknown): never {
         console.error("Database Operation Failed:", error);
 
         if (error instanceof PrismaClientKnownRequestError) {
