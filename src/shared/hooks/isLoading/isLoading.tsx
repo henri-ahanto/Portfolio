@@ -7,7 +7,7 @@ const LoadingContext = createContext<{ isLoaded: boolean }>({ isLoaded: false })
 
 export const LoadingProvider = ({ children, loadcomponent }: LoadingProps) => {
 
-    const [isLoaded, setIsLoaded] = useState<boolean>(true)
+    const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
     useEffect(() => {
         return () => { setIsLoaded(true); }
