@@ -1,5 +1,5 @@
-import { StaticContentsRepository } from "@/data/repositories/static_content_repository";
-import { StaticContentError } from "@/shared/errors/staticContentError";
+import { StaticContentsRepository } from "@/data/repositories/static_content.repositoryimpl";
+import { StaticContentError } from "@/shared/errors/static_content.error";
 
 type DeleteStaticContentUseCaseProps = {
     key: string;

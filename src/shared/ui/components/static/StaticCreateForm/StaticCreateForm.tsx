@@ -1,6 +1,6 @@
 'use client'
 
-import { StaticContentType } from '@/shared/entities/types/static_content_type'
+import { StaticContentType } from '@/shared/entities/types/static_content.type'
 import { useState } from 'react'
 
 type Props = {

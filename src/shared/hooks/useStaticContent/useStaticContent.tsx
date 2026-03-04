@@ -3,14 +3,14 @@
 
 import { useEffect, useState, useMemo } from 'react'
 import { StaticContent } from '@/shared/entities/StaticContent' // Use your existing entity type
-import { StaticContentsRepository } from '@/data/repositories/static_content_repository'
+import { StaticContentsRepository } from '@/data/repositories/static_content.repositoryimpl'
 import prisma from '@/shared/services/remote_db/prisma_service'
 
 // Import all your Use Cases
 import { CreateStaticContentUseCase } from '@/domain/usecases/static_contents/create'
 import { UpdateStaticContentUseCase } from '@/domain/usecases/static_contents/update'
 import { DeleteStaticContentUseCase } from '@/domain/usecases/static_contents/delete'
-import { StaticContentType } from '@/shared/entities/types/static_content_type'
+import { StaticContentType } from '@/shared/entities/types/static_content.type'
 import { getStaticContentAction } from './action'
 
 export function useStaticContent() {

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use server'
 
-import { StaticContentsRepository } from '@/data/repositories/static_content_repository'
+import { StaticContentsRepository } from '@/data/repositories/static_content.repositoryimpl'
 import prisma from '@/shared/services/remote_db/prisma_service'
 import { GetPaginateStaticContentUseCase } from '@/domain/usecases/static_contents/get_paginate'
 import { CreateStaticContentUseCase } from '@/domain/usecases/static_contents/create'

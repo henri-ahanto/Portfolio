@@ -1,15 +1,17 @@
 import { PrismaClient, static_contents } from "@/shared/database/prisma/generated/client";
 import { PrismaClientKnownRequestError, PrismaClientUnknownRequestError } from "@/shared/database/prisma/generated/internal/prismaNamespace";
 import { StaticContentsPanigation } from "@/shared/entities/StaticContent";
-import { StaticContentType } from "@/shared/entities/types/static_content_type";
-import { StaticContentError } from "@/shared/errors/staticContentError";
+import { StaticContentType } from "@/shared/entities/types/static_content.type";
+import { StaticContentError } from "@/shared/errors/static_content.error";
 import { PrismaClientRustError } from "@prisma/client-runtime-utils";
 import { PrismaClientInitializationError } from "@prisma/client/runtime/client";
+import { StaticContentsRepository as DomainStaticContentsRepository } from "@/domain/repository/static_content.repo";
 
-export class StaticContentsRepository {
+export class StaticContentsRepository extends DomainStaticContentsRepository {
     #prisma: PrismaClient;
 
     constructor(prisma: PrismaClient) {
+        super();
         this.#prisma = prisma;
     }
 
@@ -102,12 +104,18 @@ export class StaticContentsRepository {
         console.error("Database Operation Failed:", error);
 
         if (error instanceof PrismaClientKnownRequestError) {
-            // P2011 is the specific Prisma code for NOT NULL constraint violation (your 23502 error)
-            if (error.code === 'P2011' || error.code === 'P2003') {
-                throw new StaticContentError("Required fields are missing.", 400);
+            if (error.code === "P2025") {
+                throw new StaticContentError("Achievement not found.", 404);
             }
-            if (error.code === 'P2002') {
-                throw new StaticContentError("Unique constraint violation (Key already exists).", 409);
+            if (error.code === "P2011" || error.code === "P2003") {
+                const field = (error.meta?.constraint ?? error.meta?.field_name ?? "unknown").toString();
+                throw new StaticContentError(`Required field is missing or null: '${field}'.`, 400, field);
+            }
+            if (error.code === "P2002") {
+                const target = Array.isArray(error.meta?.target)
+                    ? (error?.meta?.target as string[]).join(", ")
+                    : (error.meta?.target ?? "unknown").toString();
+                throw new StaticContentError(`Unique constraint violation on field(s): '${target}'.`, 409, target);
             }
             throw new StaticContentError(error.message, 500);
         }

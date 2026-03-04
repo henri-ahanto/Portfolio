@@ -1,6 +1,6 @@
-import { StaticContentsRepository } from "@/data/repositories/static_content_repository";
+import { StaticContentsRepository } from "@/data/repositories/static_content.repositoryimpl";
 import { StaticContent } from "@/shared/entities/StaticContent";
-import { StaticContentType } from "@/shared/entities/types/static_content_type";
+import { StaticContentType } from "@/shared/entities/types/static_content.type";
 
 
 type CreateStaticContentUseCaseProps = {

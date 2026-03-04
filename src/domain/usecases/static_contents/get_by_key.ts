@@ -1,4 +1,4 @@
-import { StaticContentsRepository } from "@/data/repositories/static_content_repository";
+import { StaticContentsRepository } from "@/data/repositories/static_content.repositoryimpl";
 import { static_contents } from "@/shared/database/prisma/generated/client";
 
 type GetByKeyStaticContentUseCaseProps = {

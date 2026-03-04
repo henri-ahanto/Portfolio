@@ -1,6 +1,6 @@
-import { StaticContentsRepository } from "@/data/repositories/static_content_repository";
+import { StaticContentsRepository } from "@/data/repositories/static_content.repositoryimpl";
 import { static_contents } from "@/shared/database/prisma/generated/client";
-import { StaticContentError } from "@/shared/errors/staticContentError";
+import { StaticContentError } from "@/shared/errors/static_content.error";
 
 type UpdateStaticContentUseCaseProps = {
     key: string;

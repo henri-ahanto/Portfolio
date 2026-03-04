@@ -2,7 +2,7 @@ import { supabase } from './supabaseClient'
 
 export const staticTextsService = {
   get: async (key: string) =>
-    supabase.from('static_texts').select('value').eq('key', key).single(),
+    supabase.from('static_texts').select('value').eq('key', key).maybeSingle(),
 
   update: (key: string, value: string) =>
     supabase.from('static_texts').upsert({ key, value }),

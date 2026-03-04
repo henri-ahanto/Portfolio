@@ -1,7 +1,7 @@
-import { StaticContentsRepository } from "@/data/repositories/static_content_repository";
+import { StaticContentsRepository } from "@/data/repositories/static_content.repositoryimpl";
 import { StaticContentsPanigation } from "@/shared/entities/StaticContent";
-import { DomainError } from "@/shared/errors/domainError";
-import { StaticContentError } from "@/shared/errors/staticContentError";
+import { DomainError } from "@/shared/errors/domain.error";
+import { StaticContentError } from "@/shared/errors/static_content.error";
 
 type GetPaginateStaticContentUseCaseProps = {
     page: number;
