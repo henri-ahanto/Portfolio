@@ -1,6 +1,6 @@
-import { Header } from '@/ui/components/Header/Header'
-import { Footer } from '@/ui/components/Footer/Footer'
-import { GoogleTranslate } from '@/lib/i18n/GoogleTranslate'
+import { Header } from '@/shared/ui/components/Header/Header'
+import { Footer } from '@/shared/ui/components/Footer/Footer'
+import { GoogleTranslate } from '@/shared/i18n/GoogleTranslate'
 import './page.css'
 
 export default function PublicLayout({ children }: { children: React.ReactNode }) {

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useAuth } from '@/domain/hooks/useAuth/useAuth'
+import { useAuth } from '@/shared/hooks/useAuth/useAuth'
 
 export default function LoginPage() {
   const { login, resetPassword } = useAuth()

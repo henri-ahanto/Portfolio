@@ -1,17 +1,17 @@
 'use client'
 
-import { useParcours } from '@/domain/hooks/useParcours/useParcours'
+import { useParcours } from '@/shared/hooks/useParcours/useParcours'
 import { useState } from 'react'
-import { parcoursService } from '@/domain/services/parcours.service'
-import { CourseCard } from '@/ui/components/cards/CourseCard/CourseCard'
-import Course from '@/domain/entities/Course'
+import { parcoursService } from '@/shared/services/parcours.service'
+import { CourseCard } from '@/shared/ui/components/cards/CourseCard/CourseCard'
+import Course from '@/shared/entities/Course'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Plus, Trash2, Edit3, Save, X,
   MapPin, Calendar, Tag, Briefcase,
   Search, Pin
 } from 'lucide-react'
-import { TiptapEditor } from '@/ui/components/TipTap/TipTapEditor'
+import { TiptapEditor } from '@/shared/ui/components/TipTap/TipTapEditor'
 
 export default function ParcoursAdminPage() {
   const { data = [], refresh } = useParcours()
@@ -151,7 +151,7 @@ export default function ParcoursAdminPage() {
                   checked={form?.is_pinned || false}
                   onChange={e => setForm({ ...form, is_pinned: e.target.checked })}
                 />
-                <span className="text-sm font-medium text-slate-400 group-hover:text-slate-200">Épingler sur l'accueil</span>
+                <span className="text-sm font-medium text-slate-400 group-hover:text-slate-200">Épingler sur l&apos;accueil</span>
               </label>
 
               <div className="flex gap-2 pt-4">

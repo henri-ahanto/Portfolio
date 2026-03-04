@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { supabase } from '@/domain/services/supabaseClient'
+import { supabase } from '@/shared/services/supabaseClient'
 import { motion } from 'framer-motion'
 import {
   BookOpen,

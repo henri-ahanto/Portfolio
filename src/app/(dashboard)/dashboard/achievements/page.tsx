@@ -1,15 +1,15 @@
 'use client'
 
-import { useAchievements } from '@/domain/hooks/useAchievements/useAchievements'
-import { achievementsService } from '@/domain/services/achievements.service'
+import { useAchievements } from '@/shared/hooks/useAchievements/useAchievements'
+import { achievementsService } from '@/shared/services/achievements.service'
 import { useState, useMemo } from 'react'
 import dynamic from 'next/dynamic'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Plus, Image as ImageIcon, Save, X, Trophy, Star, Eye, Globe, Github } from 'lucide-react'
-import { AdminProjectCard } from '@/ui/components/Achievements/Dashboard/AdminProjectCard'
-import { STATUS_CONFIG } from '@/domain/const/Achievements'
+import { AdminProjectCard } from '@/shared/ui/components/Achievements/Dashboard/AdminProjectCard'
+import { STATUS_CONFIG } from '@/shared/const/Achievements'
 
-const TiptapEditor = dynamic(() => import('@/ui/components/TipTap/TipTapEditor').then(mod => mod.TiptapEditor), {
+const TiptapEditor = dynamic(() => import('@/shared/ui/components/TipTap/TipTapEditor').then(mod => mod.TiptapEditor), {
   ssr: false,
   loading: () => <div className="h-40 bg-slate-900/50 rounded-2xl animate-pulse border border-white/5" />
 })
@@ -130,8 +130,8 @@ export default function AchievementsAdminPage() {
                       type="button"
                       onClick={() => setForm({ ...form, status: key })}
                       className={`px-3 py-2 rounded-xl border text-[10px] font-bold transition-all duration-300 ${form.status === key
-                          ? `${config.color} ring-2 ring-white/5`
-                          : 'border-white/5 bg-white/5 text-slate-500 hover:border-white/20'
+                        ? `${config.color} ring-2 ring-white/5`
+                        : 'border-white/5 bg-white/5 text-slate-500 hover:border-white/20'
                         }`}
                     >
                       {config.label}

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { staticTextsService } from '@/domain/services/staticTexts.service'
+import { staticTextsService } from '@/shared/services/staticTexts.service'
 
 export default function SettingsPage() {
   const [keyName, setKeyName] = useState('')

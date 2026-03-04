@@ -1,5 +1,5 @@
 'use client'
-import { supabase } from '@/domain/services/supabaseClient'
+import { supabase } from '@/shared/services/supabaseClient'
 import { ArrowLeft } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
 import router from 'next/router'

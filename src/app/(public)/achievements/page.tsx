@@ -1,9 +1,9 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { useAchievements } from '@/domain/hooks/useAchievements/useAchievements'
-import { AchievementCard } from '@/ui/components/Achievements/AchievementCard' 
-import { status } from '@/domain/const/Achievements' 
+import { useAchievements } from '@/shared/hooks/useAchievements/useAchievements'
+import { AchievementCard } from '@/shared/ui/components/Achievements/AchievementCard'
+import { status } from '@/shared/const/Achievements'
 import { motion, AnimatePresence } from 'framer-motion'
 import { LayoutGrid, Filter, Rocket } from 'lucide-react'
 
@@ -38,16 +38,16 @@ export default function AchievementsPage() {
         {/* Header de la page */}
         <header className="mb-16 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div className="max-w-2xl">
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }} 
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               className="flex items-center gap-3 text-blue-500 mb-4"
             >
               <Rocket size={20} />
               <span className="text-xs font-black uppercase tracking-[0.4em]">Portfolio</span>
             </motion.div>
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }} 
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="text-5xl md:text-7xl font-black text-white tracking-tighter uppercase italic"
             >
@@ -61,11 +61,10 @@ export default function AchievementsPage() {
               <button
                 key={f.id}
                 onClick={() => setActiveFilter(f.id)}
-                className={`px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${
-                  activeFilter === f.id 
-                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20' 
+                className={`px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${activeFilter === f.id
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20'
                   : 'text-slate-500 hover:text-white'
-                }`}
+                  }`}
               >
                 {f.label}
               </button>
@@ -74,7 +73,7 @@ export default function AchievementsPage() {
         </header>
 
         {/* Grille de Projets avec Animation de présence */}
-        <motion.div 
+        <motion.div
           layout
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >

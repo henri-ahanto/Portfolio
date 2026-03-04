@@ -1,8 +1,8 @@
 'use client'
 
-import { useParcours } from "@/domain/hooks/useParcours/useParcours";
-import { CourseCard } from "@/ui/components/cards/CourseCard/CourseCard";
-import { Section } from "@/ui/components/Section/Section";
+import { useParcours } from "@/shared/hooks/useParcours/useParcours";
+import { CourseCard } from "@/shared/ui/components/cards/CourseCard/CourseCard";
+import { Section } from "@/shared/ui/components/Section/Section";
 import Link from "next/link";
 
 export default function MyCoursesPage() {

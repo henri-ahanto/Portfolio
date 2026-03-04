@@ -1,7 +1,7 @@
 'use client'
 
-import { useStacks } from '@/domain/hooks/useStacks/useStacks'
-import { stacksService } from '@/domain/services/stacks.service'
+import { useStacks } from '@/shared/hooks/useStacks/useStacks'
+import { stacksService } from '@/shared/services/stacks.service'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
@@ -10,7 +10,6 @@ import {
   Layers,
   CloudUpload,
   Zap,
-  Info,
   Box
 } from 'lucide-react'
 
@@ -104,7 +103,7 @@ export default function StackAdminPage() {
                 {loading ? (
                   <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
                 ) : (
-                  <> <Layers size={18} /> Enregistrer l'outil </>
+                  <> <Layers size={18} /> Enregistrer l&apos;outil </>
                 )}
               </button>
             </div>

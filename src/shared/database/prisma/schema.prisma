@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-ts"
+  output   = "./generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model achievements {
+  id              String    @id @default(uuid())
+  title           String
+  description     String?
+  image_url       String?
+  demo_link       String?
+  repository_link String?
+  is_pinned       Boolean?  @default(false)
+  created_at      DateTime  @default(now())
+  updated_at      DateTime? @updatedAt
+  status          String?   @default("start")
+}
+
+model messages {
+  id         String    @id @default(uuid())
+  fullname   String
+  email      String
+  subject    String
+  message    String?
+  is_read    Boolean?  @default(false)
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt
+}
+
+model parcours {
+  id          String    @id @default(uuid())
+  title       String    @unique
+  description String?
+  company     String?
+  start_date  DateTime? @db.Date
+  end_date    DateTime? @db.Date
+  is_pinned   Boolean?  @default(false)
+  created_at  DateTime  @default(now())
+  updated_at  DateTime? @updatedAt
+  period      String    @default("2024-2026")
+  tags        String[]
+  location    String?
+}
+
+model stacks {
+  id          String    @id @default(uuid())
+  name        String
+  logo_url    String?
+  created_at  DateTime  @default(now())
+  updated_at  DateTime? @updatedAt
+  description String?
+}
+
+model static_contents {
+  id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  key        String    @unique
+  type       String
+  value      String
+  created_at DateTime  @default(now())
+  updated_at DateTime? @default(now())
+}
+
+model static_texts {
+  key   String @id @default(uuid())
+  value String
+}

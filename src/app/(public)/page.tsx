@@ -1,23 +1,23 @@
 'use client'
 
-import { Hero } from '@/ui/components/Hero/Hero'
-import { TextGradient } from '@/ui/components/TextGradient/TextGradient'
-import { GradientBorderedButton } from '@/ui/components/Buttons/GradientBorderedButton/GradientBorderedButton'
-import { Section } from '@/ui/components/Section/Section'
-import { LoadText } from '@/ui/components/Loaders/LoadText/LoadText'
-import { useParcours } from '@/domain/hooks/useParcours/useParcours'
-import { useAchievements } from '@/domain/hooks/useAchievements/useAchievements'
-import { StackCarousel } from '@/ui/components/StackCarousel/StackCarousel'
-import { useStacks } from '@/domain/hooks/useStacks/useStacks'
-import { ContactForm } from '@/ui/components/Forms/ContactForm/ContactForm'
-import { MyStaticInfo } from '@/ui/components/MyStaticInfo/MyStaticInfo'
+import { Hero } from '@/shared/ui/components/Hero/Hero'
+import { TextGradient } from '@/shared/ui/components/TextGradient/TextGradient'
+import { GradientBorderedButton } from '@/shared/ui/components/Buttons/GradientBorderedButton/GradientBorderedButton'
+import { Section } from '@/shared/ui/components/Section/Section'
+import { LoadText } from '@/shared/ui/components/Loaders/LoadText/LoadText'
+import { useParcours } from '@/shared/hooks/useParcours/useParcours'
+import { useAchievements } from '@/shared/hooks/useAchievements/useAchievements'
+import { StackCarousel } from '@/shared/ui/components/StackCarousel/StackCarousel'
+import { useStacks } from '@/shared/hooks/useStacks/useStacks'
+import { ContactForm } from '@/shared/ui/components/Forms/ContactForm/ContactForm'
+import { MyStaticInfo } from '@/shared/ui/components/MyStaticInfo/MyStaticInfo'
 import { Archive, Rocket } from 'lucide-react'
 import { SocialIcon } from 'react-social-icons'
-import { CourseCard } from '@/ui/components/cards/CourseCard/CourseCard'
+import { CourseCard } from '@/shared/ui/components/cards/CourseCard/CourseCard'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { AnimatedSpan, Terminal, TypingAnimation } from '@/components/ui/terminal'
-import { AchievementCard } from '@/ui/components/Achievements/AchievementCard'
+import { AnimatedSpan, Terminal, TypingAnimation } from '@/shared/ui/components/terminal/terminal'
+import { AchievementCard } from '@/shared/ui/components/Achievements/AchievementCard'
 
 
 export default function HomePage() {
@@ -68,7 +68,7 @@ export default function HomePage() {
             <div className='w-fit p-px bg-linear-to-r from-violet-500 to-blue-700 rounded-full shadow-lg'>
               <div className='bg-white dark:bg-slate-900 rounded-full transition duration-300'>
                 <div className='py-1 px-4 bg-linear-to-r from-violet-500 to-blue-700 bg-clip-text text-transparent text-sm font-bold flex items-center gap-2'>
-                  <Rocket size={20} className='text-violet-500'/>
+                  <Rocket size={20} className='text-violet-500' />
                   <LoadText keyName="hero.badge" />
                 </div>
               </div>
@@ -191,11 +191,11 @@ export default function HomePage() {
       </Section>
 
       <Section
-      id='achievements'
+        id='achievements'
         from='#2247FF'
         to='#4E1365'
         title="Mes Réalisations"
-        cta={<a href="/achievements" className="font-bold hover:underline">Découvrir mes projets</a>}
+        cta={<Link href="/achievements" className="font-bold hover:underline">Découvrir mes projets</Link>}
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {achievements.slice(0, 6).map(a => (

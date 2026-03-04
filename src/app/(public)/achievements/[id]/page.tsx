@@ -1,12 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import { useParams } from 'next/navigation'
-import { find } from '@/domain/hooks/useAchievements/useAchievements'
-import { Achievement } from '@/domain/entities/Achievement'
+import { find } from '@/shared/hooks/useAchievements/useAchievements'
+import { Achievement } from '@/shared/entities/Achievement'
 import { useEffect, useState } from 'react'
 import { ArrowLeft, Calendar, Github, Globe, Layout, Link } from 'lucide-react'
 import { motion } from 'framer-motion'
-import { status, STATUS_CONFIG } from '@/domain/const/Achievements'
+import { status, STATUS_CONFIG } from '@/shared/const/Achievements'
 
 export default function ProjectDetailsPage() {
     const { id } = useParams()
@@ -30,7 +31,7 @@ export default function ProjectDetailsPage() {
         }
 
         if (id) fetchProject()
-    }, [id, find])
+    }, [id])
 
     if (loading) return <p>Chargement du projet...</p>
     if (!project) return <p>Projet non trouvé.</p>

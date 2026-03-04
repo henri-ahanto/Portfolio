@@ -1,8 +1,8 @@
 'use client'
 
-import { useMessages } from '@/domain/hooks/useMessages/useMessages'
-import { messagesService } from '@/domain/services/messages.service'
-import { MessageCard } from '@/ui/components/Message/MessageCard'
+import { useMessages } from '@/shared/hooks/useMessages/useMessages'
+import { messagesService } from '@/shared/services/messages.service'
+import { MessageCard } from '@/shared/ui/components/Message/MessageCard'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Mail,
